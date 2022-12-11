@@ -1,5 +1,5 @@
 import { onProcess, useLogger, useOperations, constants } from 'mikser-core'
-import archieml  from 'archieml'
+import archieml from 'archieml'
 
 onProcess(() => {
     const logger = useLogger()
