@@ -5,11 +5,11 @@ onProcess(() => {
     const logger = useLogger()
     const entities = useOperations([constants.OPERATION_CREATE, constants.OPERATION_UPDATE])
     .map(operation => operation.entity)
-    .filter(entity => entity.source && entity.format == 'aml')
+    .filter(entity => entity.content && entity.format == 'aml')
 
     for (let entity of entities) {
-        entity.meta = Object.assign(entity.meta || {}, archieml.load(entity.source))
-        delete entity.source
+        entity.meta = Object.assign(entity.meta || {}, archieml.load(entity.content))
+        delete entity.content
         logger.trace('ArchieML %s: %s', entity.collection, entity.id)
     }
 })
