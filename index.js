@@ -7,10 +7,10 @@ export default ({
     updateEntry,
     constants: { OPERATION }
 }) => {
-    onProcess(async () => {
+    onProcess(async (signal) => {
         const logger = useLogger()
             
-        for await (let { id, entity } of useJournal('Aml', [OPERATION.CREATE, OPERATION.UPDATE])) {
+        for await (let { id, entity } of useJournal('Aml', [OPERATION.CREATE, OPERATION.UPDATE], signal)) {
             if (entity.content && entity.format == 'aml') {
                 entity.meta = Object.assign(entity.meta || {}, archieml.load(entity.content))
                 delete entity.content
